@@ -338,17 +338,17 @@ footer{
 
   <div class="hero-stats animate-fade-up" style="animation-delay:.5s">
     <div class="stat-item">
-      <div class="stat-num">6<span class="g">+</span></div>
+      <div class="stat-num"><span class="counter" data-target="6">0</span><span class="g">+</span></div>
       <div class="stat-label">Years XP</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <div class="stat-num">100<span class="g">+</span></div>
+      <div class="stat-num"><span class="counter" data-target="100">0</span><span class="g">+</span></div>
       <div class="stat-label">Films</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <div class="stat-num">300<span class="g">+</span></div>
+      <div class="stat-num"><span class="counter" data-target="300">0</span><span class="g">+</span></div>
       <div class="stat-label">UI Screens</div>
     </div>
   </div>
@@ -566,5 +566,39 @@ footer{
   <span class="footer-r">@gouthamplay</span>
 </footer>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const duration = 1400;
+    const counters = Array.from(document.querySelectorAll('.counter'));
+
+    function animateCounter(counter, callback) {
+      const target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / (duration / 16)));
+
+      function update() {
+        current += step;
+        if (current >= target) {
+          counter.textContent = target;
+          if (typeof callback === 'function') callback();
+        } else {
+          counter.textContent = current;
+          requestAnimationFrame(update);
+        }
+      }
+
+      update();
+    }
+
+    function animateSequentially(index) {
+      if (index >= counters.length) return;
+      animateCounter(counters[index], function () {
+        animateSequentially(index + 1);
+      });
+    }
+
+    animateSequentially(0);
+  });
+</script>
 </body>
 </html>

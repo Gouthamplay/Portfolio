@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RA Goutham — Design Lead & VFX Supervisor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1a1a1a;
+  --bg-dark:#141414;
+  --bg-card:#1f1f1f;
+  --fg:#f5f5f5;
+  --fg-muted:#999;
+  --fg-dim:#555;
+  --green:#00eb01;
+  --green-dim:rgba(0,235,1,0.08);
+  --border:#2a2a2a;
+  --border-hover:rgba(0,235,1,0.35);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Sora',sans-serif;
+  background:var(--bg-dark);
+  color:var(--fg);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+@keyframes fade-up{
+  0%{opacity:0;transform:translateY(22px);filter:blur(4px)}
+  100%{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.animate-fade-up{opacity:0;animation:fade-up .7s cubic-bezier(.16,1,.3,1) forwards}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 56px;
+  background:rgba(20,20,20,0.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-size:15px;font-weight:600;letter-spacing:.14em;color:var(--fg);text-decoration:none;text-transform:uppercase}
+.nav-logo span{color:var(--green)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.nav-cta{
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  background:#252525;color:var(--fg);border:1px solid var(--border);
+  padding:11px 24px;border-radius:4px;cursor:pointer;text-decoration:none;
+  transition:all .2s
+}
+.nav-cta:hover{border-color:var(--green);color:var(--green)}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:flex-end;
+  background:var(--bg-dark);
+  overflow:hidden;
+  padding:0 56px 72px;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,235,1,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,235,1,.035) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 40% 50%,black 20%,transparent 100%);
+  mask-image:radial-gradient(ellipse 80% 80% at 40% 50%,black 20%,transparent 100%);
+}
+.hero-glow{
+  position:absolute;top:-240px;left:-240px;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(0,235,1,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-glow-r{
+  position:absolute;bottom:-200px;right:-100px;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(0,235,1,0.04) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:2;max-width:780px}
+.hero-eyebrow{
+  font-size:11px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--green);margin-bottom:24px;display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--green)}
+h1{
+  font-size:clamp(4rem,10vw,8rem);font-weight:700;
+  line-height:0.95;letter-spacing:-.055em;
+  color:var(--fg);text-transform:uppercase;margin-bottom:20px;
+}
+h1 .accent{color:var(--green)}
+.hero-sub{
+  font-size:clamp(1rem,2.2vw,1.5rem);font-weight:300;
+  color:rgba(245,245,245,.72);margin-bottom:16px;letter-spacing:.01em;
+}
+.hero-desc{
+  font-size:clamp(.85rem,1.4vw,1.05rem);font-weight:300;
+  color:var(--fg-muted);line-height:1.8;margin-bottom:36px;max-width:560px;
+}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.btn-primary{
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--green);color:#0a0a0a;border:none;
+  padding:16px 32px;border-radius:3px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.btn-primary:active{transform:scale(.97)}
+.btn-secondary{
+  font-family:'Sora',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  background:transparent;color:var(--fg);border:1px solid #3a3a3a;
+  padding:16px 32px;border-radius:3px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;
+}
+.btn-secondary:hover{border-color:var(--fg-muted);transform:translateY(-2px)}
+.btn-secondary:active{transform:scale(.97)}
+.hero-trust{font-size:11px;font-weight:400;color:var(--fg-dim);letter-spacing:.06em}
+.hero-stats{
+  position:absolute;right:56px;bottom:72px;z-index:2;
+  display:flex;flex-direction:column;gap:32px;align-items:flex-end;
+}
+.stat-item{text-align:right}
+.stat-num{font-size:2.6rem;font-weight:700;color:var(--fg);line-height:1;letter-spacing:-.04em}
+.stat-num .g{color:var(--green)}
+.stat-label{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-muted);margin-top:3px}
+.stat-divider{width:100%;height:1px;background:var(--border)}
+
+/* TICKER */
+.ticker-wrap{
+  overflow:hidden;background:rgba(0,0,0,.55);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:14px 0;
+}
+.ticker-inner{
+  display:flex;width:max-content;
+  animation:marquee 32s linear infinite;
+}
+.ticker-item{
+  font-size:10px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  color:#444;padding:0 44px;white-space:nowrap;
+}
+.ticker-item.accent{color:var(--green)}
+
+/* SECTIONS */
+section{padding:100px 56px}
+.section-label{
+  font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--green);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.section-label::after{content:'';flex:0 0 52px;height:1px;background:var(--border)}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-.04em;margin-bottom:56px;line-height:1.1}
+
+/* WORK GRID */
+#works{padding-bottom:0}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.work-card{
+  position:relative;background:var(--bg-dark);padding:44px 40px;
+  cursor:pointer;transition:background .25s;overflow:hidden;
+  text-decoration:none;color:inherit;display:block;
+}
+.work-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--green);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.work-card:hover{background:#181818}
+.work-card:hover::after{transform:scaleX(1)}
+.work-card-num{font-size:10px;font-weight:500;letter-spacing:.2em;color:var(--fg-dim);margin-bottom:24px;text-transform:uppercase}
+.work-card-title{font-size:1.1rem;font-weight:600;color:var(--fg);margin-bottom:10px;letter-spacing:-.02em;line-height:1.3}
+.work-card-desc{font-size:.82rem;font-weight:300;color:var(--fg-muted);line-height:1.7;margin-bottom:24px}
+.work-card-tag{
+  display:inline-block;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--green);border:1px solid rgba(0,235,1,.22);padding:5px 12px;border-radius:2px;
+}
+.work-arrow{
+  position:absolute;top:40px;right:40px;font-size:20px;color:var(--fg-dim);
+  opacity:0;transform:translate(-5px,5px);transition:all .25s;line-height:1;
+}
+.work-card:hover .work-arrow{opacity:1;transform:translate(0,0);color:var(--green)}
+.work-card-cta{
+  display:flex;align-items:center;justify-content:center;min-height:220px;
+  background:var(--bg-dark);cursor:default;
+}
+.work-card-cta-inner{text-align:center}
+.work-card-cta-inner .label{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.work-card-cta-inner .sub{font-size:.88rem;font-weight:300;color:var(--fg-muted);line-height:1.7}
+
+/* REEL SECTION */
+.reel-section{background:var(--bg);border-top:1px solid var(--border)}
+.reel-inner{
+  border:1px solid var(--border);border-radius:6px;
+  overflow:hidden;position:relative;
+  aspect-ratio:16/9;background:#0e0e0e;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .3s;
+}
+.reel-inner:hover{border-color:rgba(0,235,1,.3)}
+.reel-play{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--green);display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;transition:transform .2s;
+}
+.reel-inner:hover .reel-play{transform:scale(1.08)}
+.reel-play::after{
+  content:'';border-style:solid;
+  border-width:14px 0 14px 24px;
+  border-color:transparent transparent transparent #0a0a0a;
+  margin-left:4px;
+}
+.reel-label{
+  position:absolute;bottom:28px;left:32px;
+  font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--fg-muted);
+}
+.reel-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);
+  pointer-events:none;
+}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:96px;align-items:start}
+.about-text p{font-size:.95rem;font-weight:300;color:var(--fg-muted);line-height:1.85;margin-bottom:18px}
+.about-text p:last-of-type{margin-bottom:0}
+.skills-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:40px}
+.skill-chip{
+  font-size:10px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--fg-muted);border:1px solid var(--border);padding:8px 14px;border-radius:2px;
+  transition:all .2s;cursor:default;
+}
+.skill-chip:hover{color:var(--green);border-color:rgba(0,235,1,.3)}
+.about-highlights{display:flex;flex-direction:column;gap:2px}
+.highlight-item{
+  padding:22px 26px;border:1px solid var(--border);
+  display:flex;align-items:flex-start;gap:16px;
+  transition:border-color .2s,background .2s;margin-bottom:-1px;
+}
+.highlight-item:hover{border-color:var(--border-hover);background:#181818;z-index:1;position:relative}
+.hi-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px}
+.hi-title{font-size:.88rem;font-weight:600;color:var(--fg);margin-bottom:4px;letter-spacing:-.01em}
+.hi-val{font-size:.78rem;font-weight:300;color:var(--fg-muted);line-height:1.5}
+
+/* CONTACT */
+.contact-section{background:var(--bg);border-top:1px solid var(--border)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.contact-heading{font-size:clamp(2.2rem,5vw,4.2rem);font-weight:700;letter-spacing:-.055em;line-height:1.05;margin-bottom:36px}
+.contact-heading em{font-style:normal;color:var(--green)}
+.contact-sub{font-size:.92rem;font-weight:300;color:var(--fg-muted);line-height:1.8;margin-bottom:32px;max-width:400px}
+.contact-direct{display:flex;flex-direction:column;gap:8px}
+.contact-direct a{font-size:.85rem;font-weight:400;color:var(--fg-muted);text-decoration:none;transition:color .2s;letter-spacing:.03em}
+.contact-direct a:hover{color:var(--green)}
+.contact-links{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.contact-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px;border:1px solid var(--border);border-radius:3px;
+  color:var(--fg);text-decoration:none;font-size:.85rem;font-weight:500;
+  letter-spacing:.05em;transition:all .2s;
+}
+.contact-link:hover{border-color:rgba(0,235,1,.35);color:var(--green);background:#181818}
+.contact-link-arrow{font-size:16px;opacity:.5;transition:opacity .2s}
+.contact-link:hover .contact-link-arrow{opacity:1}
+.contact-link.highlight{border-color:rgba(0,235,1,.3);color:var(--green)}
+.contact-link.highlight:hover{background:rgba(0,235,1,.05)}
+
+/* FOOTER */
+footer{
+  padding:28px 56px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg-dark);
+}
+.footer-l{font-size:11px;font-weight:400;color:var(--fg-dim);letter-spacing:.06em}
+.footer-r{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .work-grid{grid-template-columns:repeat(2,1fr)}
+  .about-grid{grid-template-columns:1fr;gap:56px}
+  .contact-wrap{grid-template-columns:1fr;gap:56px}
+}
+@media(max-width:768px){
+  nav{padding:16px 24px}
+  .nav-links,.nav-cta{display:none}
+  .hero{padding:0 24px 52px;min-height:100svh}
+  .hero-stats{display:none}
+  section{padding:72px 24px}
+  .work-grid{grid-template-columns:1fr}
+  footer{padding:22px 24px;flex-direction:column;gap:10px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-logo">GOUTHAM<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#works">Film Works</a></li>
+    <li><a href="#works">Motion</a></li>
+    <li><a href="#works">3D</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-r"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow animate-fade-up" style="animation-delay:.1s">Design Lead · VFX Supervisor · Bangalore, India</div>
+    <h1 class="animate-fade-up" style="animation-delay:.2s">RA<br>Gout<span class="accent">ham</span></h1>
+    <p class="hero-sub animate-fade-up" style="animation-delay:.38s">VFX · Motion Graphics · Design Leadership</p>
+    <p class="hero-desc animate-fade-up" style="animation-delay:.52s">
+      6+ years crafting visual stories across Kannada cinema, TVC campaigns, and enterprise product teams. Currently leading design at Sheshi Pvt. Ltd — from film frames to interface screens.
+    </p>
+    <div class="hero-ctas animate-fade-up" style="animation-delay:.66s">
+      <a href="#works" class="btn-primary">View Work</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+    <p class="hero-trust animate-fade-up" style="animation-delay:.82s">100+ Kannada films &nbsp;·&nbsp; 10+ TVC campaigns &nbsp;·&nbsp; 300+ UI screens</p>
+  </div>
+
+  <div class="hero-stats animate-fade-up" style="animation-delay:.5s">
+    <div class="stat-item">
+      <div class="stat-num">6<span class="g">+</span></div>
+      <div class="stat-label">Years XP</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">100<span class="g">+</span></div>
+      <div class="stat-label">Films</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="stat-num">300<span class="g">+</span></div>
+      <div class="stat-label">UI Screens</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">VFX Compositing</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Title Animation</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Motion Graphics</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">3D Visualisation</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">UI / UX Design</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">After Effects</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Maya & Unreal Engine</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Brand Design</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Lyrical Videos</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Motion Posters</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">VFX Compositing</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Title Animation</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Motion Graphics</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">3D Visualisation</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">UI / UX Design</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">After Effects</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Maya & Unreal Engine</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Brand Design</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Lyrical Videos</span>
+    <span class="ticker-item accent">✦</span>
+    <span class="ticker-item">Motion Posters</span>
+    <span class="ticker-item accent">✦</span>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="works" style="padding-bottom:0">
+  <div class="section-label">Selected Work</div>
+  <h2 class="section-title">Projects & Reel</h2>
+</section>
+
+<div class="work-grid">
+  <a class="work-card" href="https://www.youtube.com/@GouthamPlays" target="_blank">
+    <div class="work-card-num">01 — Motion Graphics</div>
+    <div class="work-arrow">↗</div>
+    <div class="work-card-title">Puravankara & Provident TVCs</div>
+    <div class="work-card-desc">TVCs, walkthrough videos and showcase reels for one of Bangalore's leading real-estate brands. Fast-turnaround creative including Online Home Habba campaign.</div>
+    <span class="work-card-tag">Motion · TVC</span>
+  </a>
+  <a class="work-card" href="https://www.youtube.com/@GouthamPlays" target="_blank">
+    <div class="work-card-num">02 — Film VFX</div>
+    <div class="work-arrow">↗</div>
+    <div class="work-card-title">Kannada Cinema · 100+ Projects</div>
+    <div class="work-card-desc">Title animations, lyrical videos, motion posters and VFX compositing across 100+ Kannada films at Future Age Studio. Maya & Unreal Engine for select sequences.</div>
+    <span class="work-card-tag">VFX · Film</span>
+  </a>
+  <a class="work-card" href="#contact">
+    <div class="work-card-num">03 — Product Design</div>
+    <div class="work-arrow">↗</div>
+    <div class="work-card-title">Sheshi App · UI/UX v1 → v2</div>
+    <div class="work-card-desc">Led complete redesign of the Sheshi application as Design Lead — 300+ screens delivered across mobile and web within one month. Zero-to-one system design.</div>
+    <span class="work-card-tag">UI/UX · Product</span>
+  </a>
+  <a class="work-card" href="https://www.youtube.com/@GouthamPlays" target="_blank">
+    <div class="work-card-num">04 — 3D Works</div>
+    <div class="work-arrow">↗</div>
+    <div class="work-card-title">3D Gallery</div>
+    <div class="work-card-desc">Personal and freelance 3D projects spanning environment design, product visualisation, and experimental renders. Tools: Maya, Blender, Unreal Engine.</div>
+    <span class="work-card-tag">3D · Render</span>
+  </a>
+  <a class="work-card" href="https://www.instagram.com/gouthamplay_official/" target="_blank">
+    <div class="work-card-num">05 — Print & Brand</div>
+    <div class="work-arrow">↗</div>
+    <div class="work-card-title">Posters & Graphic Design</div>
+    <div class="work-card-desc">Posters, key-art and brand identity work at ACN Bizhive, Tradonomix and personal explorations. Typography-led, print-ready aesthetics.</div>
+    <span class="work-card-tag">Graphics · Brand</span>
+  </a>
+  <div class="work-card work-card-cta">
+    <div class="work-card-cta-inner">
+      <div class="label">NDA Projects</div>
+      <div class="sub">More work available<br>on request</div>
+    </div>
+  </div>
+</div>
+
+<!-- REEL -->
+<section class="reel-section">
+  <div class="section-label">Showreel</div>
+  <h2 class="section-title">Watch the Reel</h2>
+  <a class="reel-inner" href="https://www.youtube.com/@GouthamPlays" target="_blank" rel="noopener">
+    <div class="reel-overlay"></div>
+    <div class="reel-play"></div>
+    <div class="reel-label">RA Goutham · 2024 Showreel</div>
+  </a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Background</div>
+  <h2 class="section-title">About Me</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a Design Lead and VFX Supervisor at Sheshi Pvt. Ltd, Bangalore — with 6+ years of experience that spans the gap between cinematic VFX production and product design. That cross-industry range isn't accidental; it's the thing I've built deliberately.</p>
+      <p>My time at Future Age Studio (4 years) was immersive: motion graphics for 100+ Kannada films, TVC campaigns for real-estate and consumer brands, lyrical videos, and VFX compositing for tricky shots in Maya and Unreal. The speed and volume of that environment taught me to solve visual problems fast without losing craft.</p>
+      <p>Since April 2024 at Sheshi, I've led UI/UX, motion, and brand design simultaneously — including directing a full app redesign of 300+ screens in a single month. I work well at the intersection of creative direction and hands-on execution. When I lead, I'm still in the files.</p>
+      <div class="skills-row">
+        <span class="skill-chip">After Effects</span>
+        <span class="skill-chip">Maya</span>
+        <span class="skill-chip">Unreal Engine</span>
+        <span class="skill-chip">Figma</span>
+        <span class="skill-chip">Premiere Pro</span>
+        <span class="skill-chip">Blender</span>
+        <span class="skill-chip">Photoshop</span>
+        <span class="skill-chip">Illustrator</span>
+        <span class="skill-chip">DaVinci Resolve</span>
+        <span class="skill-chip">Cinema 4D</span>
+      </div>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-item">
+        <div class="hi-dot"></div>
+        <div>
+          <div class="hi-title">Design Lead & VFX Supervisor</div>
+          <div class="hi-val">Sheshi Pvt. Ltd, Bangalore · Apr 2024 – Present</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-dot"></div>
+        <div>
+          <div class="hi-title">VFX & Motion Graphics Artist</div>
+          <div class="hi-val">Future Age Studio · 4 years</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-dot"></div>
+        <div>
+          <div class="hi-title">MAGMA Studio</div>
+          <div class="hi-val">Motion Graphics & VFX</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="hi-dot"></div>
+        <div>
+          <div class="hi-title">ACN Bizhive · Tradonomix</div>
+          <div class="hi-val">Brand Design & Visual Communication</div>
+        </div>
+      </div>
+      <div class="highlight-item" style="border-color:rgba(0,235,1,.18);background:rgba(0,235,1,.03)">
+        <div class="hi-dot"></div>
+        <div>
+          <div class="hi-title" style="color:var(--green)">300+ UI Screens Delivered</div>
+          <div class="hi-val">Sheshi App v1 → v2 redesign in 1 month</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-label">Let's Talk</div>
+  <div class="contact-wrap">
+    <div>
+      <h2 class="contact-heading">Ready to<br>make something<br><em>remarkable?</em></h2>
+      <p class="contact-sub">Open to senior design roles, Head of Design positions, and select freelance projects across VFX, motion, and product design.</p>
+      <div class="contact-direct">
+        <a href="mailto:gouthamplay@gmail.com">gouthamplay@gmail.com</a>
+        <a href="tel:+919535001864">+91 95350 01864</a>
+        <span style="font-size:.85rem;font-weight:300;color:var(--fg-dim);letter-spacing:.03em">Bangalore, India</span>
+      </div>
+    </div>
+    <div>
+      <div class="contact-links">
+        <a href="https://www.instagram.com/gouthamplay_official/" target="_blank" rel="noopener" class="contact-link">
+          Instagram <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/goutham-r-a-b359a9156/" target="_blank" rel="noopener" class="contact-link">
+          LinkedIn <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://youtube.com/@GouthamPlays" target="_blank" rel="noopener" class="contact-link">
+          YouTube <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://www.facebook.com/goutham.play/" target="_blank" rel="noopener" class="contact-link">
+          Facebook <span class="contact-link-arrow">↗</span>
+        </a>
+        <a href="https://twitter.com/gouthamplay" target="_blank" rel="noopener" class="contact-link">
+          Twitter / X <span class="contact-link-arrow">↗</span>
+        </a>
+      </div>
+      <a href="resume.html" target="_blank" rel="noopener" class="contact-link highlight">
+        Download Resume <span class="contact-link-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-l">© 2025 RA Goutham &nbsp;·&nbsp; Design Lead & VFX Supervisor &nbsp;·&nbsp; Bangalore, India</span>
+  <span class="footer-r">@gouthamplay</span>
+</footer>
+
+</body>
+</html>
